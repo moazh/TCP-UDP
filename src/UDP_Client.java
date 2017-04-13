@@ -51,6 +51,11 @@ public class UDP_Client {
 
                 } else if (command.equalsIgnoreCase("timestamp")) {
                     receiveData = new byte[19];
+                } else if (command.equalsIgnoreCase("exit")) {
+
+                    reader2.close();
+                    isRunning = false;
+                    return;
                 } else {
                     receiveData = new byte[29];
                 }
@@ -66,7 +71,8 @@ public class UDP_Client {
 
                 receiveData = new byte[3204];
                 DatagramPacket response = new DatagramPacket(receiveData, receiveData.length);
-                DataInputStream din = new DataInputStream(new ByteArrayInputStream(response.getData(), response.getOffset(), response.getLength()));
+                DataInputStream din = new DataInputStream(new ByteArrayInputStream(response.getData(),
+                        response.getOffset(), response.getLength()));
 
                 FileOutputStream fos = new FileOutputStream(fileOutput);
                 clientSocket.receive(response);
@@ -89,11 +95,8 @@ public class UDP_Client {
                 long time2 = System.nanoTime();
                 long timeTaken = time2 - time1;
                 System.out.println("Time taken for receiving and saving the file is: " + timeTaken + " ns");
-
-
-            } else {
-                isRunning = false;
             }
+
             clientSocket.close();
         }
     }

@@ -23,8 +23,10 @@ public class TCP_Server {
 
             if (request.equalsIgnoreCase("ping")) {
                 outToClient.writeBytes("Pong" + '\n');
+
             } else if (request.equalsIgnoreCase("timestamp")) {
-                outToClient.writeBytes(new SimpleDateFormat("HH:mm:ss dd/MM/yyyy").format(Calendar.getInstance().getTime()) + '\n');
+                outToClient.writeBytes(new SimpleDateFormat("HH:mm:ss dd/MM/yyyy").format(Calendar.getInstance()
+                        .getTime()) + '\n');
 
             } else if (request.equalsIgnoreCase("file")) {
 
